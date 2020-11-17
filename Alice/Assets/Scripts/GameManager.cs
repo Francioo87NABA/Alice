@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
     public Transform transformPorta1;
     private Animator animatorPorta1;
 
+    public AudioSource sequenza1;
+    public AudioSource sequenza2;
+
+    public GameObject player;
+    
     private int one;
     private int two;
     
@@ -48,9 +53,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Sequenza1()
     {
-        //instanzia audio
+        yield return new WaitForSeconds(5f);
         
-        yield return new WaitForSeconds(5f); //DEVE ESSERE 15 SECONDI
+        sequenza1.transform.position = player.transform.position;
+        sequenza1.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(15f); 
         
         porta1.SetActive(true);
         porta1.transform.position = transformPorta1.position;
@@ -62,8 +70,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Sequenza2()
     {
-        //Instanzia audio
-        
+        sequenza2.transform.position = player.transform.position;
+        sequenza2.gameObject.SetActive((true));
+
         yield return new WaitForSeconds(5f);
         
         animatorPorta1.SetBool("Apriti", false);
