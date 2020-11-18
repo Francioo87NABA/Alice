@@ -10,6 +10,8 @@ public class Porta : MonoBehaviour
     public bool porta2;
     public bool porta3;
     public bool fuoriPorta1;
+    public bool fuoriPorta2;
+    public bool fuoriPorta3;
 
     private void OnTriggerEnter(Collider other)
     {

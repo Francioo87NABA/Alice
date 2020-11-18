@@ -12,21 +12,33 @@ public class GameManager : MonoBehaviour
     public bool dentroPorta2;
     public bool dentroPorta3;
     public bool fuoriPorta1;
-    public bool monocoloY;
-    public bool monocoloZ;
+    public bool monocoloYPreso;
+    public bool monocoloZPreso;
+    public bool vedoMonocoloY;
+    public bool vedoMonocoloZ;
 
-    public GameObject porta;
-    public Transform portaTransform;
-    public Transform cadavereTransform;
+    public bool lHoPreso;
     
+    public GameObject buttonMonocoloY;
+    public GameObject buttonMonocoloZ;
+
     public GameObject triggerPorta1;
     public GameObject triggerPorta2;
     public GameObject triggerPorta3;
     public GameObject triggerFuoriPorta1;
-
-    public GameObject cadavere;
+    public GameObject triggerFuoriPorta2;
+    public GameObject triggerFuoriPorta3;
     
-    private Animator animatorPorta;
+    //Plane con Shader che ti permette di vedere alcune cose
+    public GameObject filtroY;
+    public GameObject filtroZ;
+    
+    public GameObject porta;
+    public Transform portaTransform;
+    public GameObject cadavere;
+    public Transform cadavereTransform;
+    public GameObject alice;
+    public Transform aliceTransform;
 
     public GameObject player;
     
@@ -35,13 +47,26 @@ public class GameManager : MonoBehaviour
     public AudioSource sequenza3;
     public AudioSource sequenza4;
     public AudioSource sequenza5;
+    public AudioSource sequenza6;
+    public AudioSource sequenza7;
+    public AudioSource sequenzaSoldi;
+    public AudioSource sequenzaFoto;
+    public AudioSource sequenzaFinale;
+    
+    private Animator animatorPorta;
     
     private int one;
     private int two;
     private int three;
     private int four;
+    private int five;
+    private int six;
+    private int seven;
+    private int eight;
+    private int nine;
+    private int ten;
     
-
+    
     private void OnEnable()
     {
         Singleton = this;
@@ -66,7 +91,7 @@ public class GameManager : MonoBehaviour
             two++;
         }
 
-        if (three == 0 && monocoloY && monocoloZ)
+        if (three == 0 && monocoloYPreso && monocoloZPreso)
         {
             StartCoroutine(Sequenza3());
             three++;
@@ -77,10 +102,17 @@ public class GameManager : MonoBehaviour
             StartCoroutine(Sequenza4());
             four++;
         }
-        
-        
-            
+
+        if (five == 0 && vedoMonocoloY || vedoMonocoloZ)
+        {
+            alice.transform.position = aliceTransform.position;
+            alice.gameObject.SetActive(true);
+            StartCoroutine(Sequenza5());
+            five++;
+        }
     }
+
+    #region Sequenza1
 
     IEnumerator Sequenza1()
     {
@@ -99,6 +131,10 @@ public class GameManager : MonoBehaviour
         
         animatorPorta.SetBool("Apriti",true);
     }
+    
+    #endregion
+
+    #region Sequenza2
 
     IEnumerator Sequenza2()
     {
@@ -113,6 +149,10 @@ public class GameManager : MonoBehaviour
         
         triggerPorta1.SetActive(false);
     }
+    
+    #endregion
+
+    #region Sequenza3
 
     IEnumerator Sequenza3()
     {
@@ -130,7 +170,11 @@ public class GameManager : MonoBehaviour
         
         animatorPorta.SetBool("Apriti",true);
     }
+    
+    #endregion
 
+    #region Sequenza4
+    
     IEnumerator Sequenza4()
     {
         //Parte quando esci dalla porta1 e vedi il tuo cadavere
@@ -141,5 +185,109 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         
         animatorPorta.SetBool("Apriti", false);
+        
+        yield return new WaitForSeconds(28f);
+
+        buttonMonocoloY.SetActive(true);
+        buttonMonocoloZ.SetActive(true);
+    }
+
+    #endregion
+
+    #region Sequenza5
+
+    IEnumerator Sequenza5()
+    {
+        // parte quando vedi alice 
+        
+        sequenza5.transform.position = player.transform.position;
+        sequenza5.gameObject.SetActive(true);
+        
+        yield return new WaitForSeconds(25f);
+        
+        animatorPorta.SetBool("Apriti",true);
+    }
+    
+    #endregion
+
+    #region Sequenza6
+
+    IEnumerator Sequenza6()
+    {
+        //Parte quando prendi o il coltello o il mestolo 
+        yield return new WaitForSeconds(1f);
+    }
+
+    #endregion
+
+    #region Sequenza7
+
+    IEnumerator Sequenza7()
+    {
+        //Parte quando esci dalla porta 2
+        yield return new WaitForSeconds(1f);
+    }
+
+    #endregion
+
+    #region SequenzaSoldi
+
+    IEnumerator SequenzaSoldi()
+    {
+        //Parte quando esamini i soldi 
+        yield return new WaitForSeconds(1f);
+    }
+
+    #endregion
+    
+    #region SequenzaFoto
+
+    IEnumerator SequenzaFoto()
+    {
+        //Parte quando esamini le foto
+        yield return new WaitForSeconds(1f);
+    }
+
+    #endregion
+    
+    #region SequenzaFinale
+
+    IEnumerator Fine()
+    {
+        //Parte quando esci dalla porta 3
+        yield return new WaitForSeconds(1f);
+        
+        //se soldi un audio se foto un altro 
+    }
+
+    #endregion
+
+    public void Prendilo()
+    {
+        lHoPreso = true;
+    }
+    
+    public void MonocoloY ()
+    {
+        filtroY.SetActive(true);
+        vedoMonocoloY = true;
+    }
+    
+    public void MonocoloYOff ()
+    {
+        filtroY.SetActive(false);
+        vedoMonocoloY = false;
+    }
+   
+    public void MonocoloZ ()
+    {
+        filtroZ.SetActive(true);
+        vedoMonocoloZ = true;
+    }
+
+    public void MonocoloZOff ()
+    {
+        filtroZ.SetActive(false);
+        vedoMonocoloZ = false;
     }
 }
