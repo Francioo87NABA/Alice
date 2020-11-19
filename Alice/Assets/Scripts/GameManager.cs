@@ -37,12 +37,11 @@ public class GameManager : MonoBehaviour
     public GameObject triggerFuoriPorta1;
     public GameObject triggerFuoriPorta2;
     public GameObject triggerFuoriPorta3;
-    
-    //Plane con Shader che ti permette di vedere alcune cose
-    public GameObject filtroY;
-    public GameObject filtroZ;
-    
+
     public GameObject porta;
+    public GameObject mondo1;
+    public GameObject mondo2;
+    public GameObject mondo3;
     public GameObject cadavere;
     public GameObject alice;
     public GameObject armaColtello;
@@ -227,6 +226,9 @@ public class GameManager : MonoBehaviour
         
         animatorPorta.SetBool("Apriti", false);
         
+        mondo1.SetActive(false);
+        mondo2.SetActive(true);
+        
         yield return new WaitForSeconds(28f);
 
         buttonMonocoloY.SetActive(true);
@@ -289,6 +291,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         
         animatorPorta.SetBool("Apriti", false);
+        
+        mondo2.SetActive(false);
+        mondo3.SetActive(true);
         
         yield return new WaitForSeconds(25f);
         
@@ -361,25 +366,21 @@ public class GameManager : MonoBehaviour
     
     public void MonocoloY ()
     {
-        filtroY.SetActive(true);
         vedoMonocoloY = true;
     }
     
     public void MonocoloYOff ()
     {
-        filtroY.SetActive(false);
         vedoMonocoloY = false;
     }
    
     public void MonocoloZ ()
     {
-        filtroZ.SetActive(true);
         vedoMonocoloZ = true;
     }
 
     public void MonocoloZOff ()
     {
-        filtroZ.SetActive(false);
         vedoMonocoloZ = false;
     }
 

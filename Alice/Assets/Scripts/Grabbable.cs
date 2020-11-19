@@ -81,7 +81,7 @@ public class Grabbable : MonoBehaviour
         {
             bottonePrendi.SetActive(true);
 
-            if (soldi || foto)
+            if (soldi || foto && !GameManager.Singleton.esaminoFoto || !GameManager.Singleton.esaminoSoldi)
             {
                 bottoneEsamina.SetActive(true);
             }
