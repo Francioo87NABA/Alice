@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour
     public GameObject triggerFuoriPorta2;
     public GameObject triggerFuoriPorta3;
 
+    public GameObject portaleMondo1;
+    public GameObject portaleMondo2;
+    public GameObject portaleMondo3;
+
     public GameObject porta;
     public GameObject mondo1;
     public GameObject mondo2;
@@ -227,7 +231,9 @@ public class GameManager : MonoBehaviour
         animatorPorta.SetBool("Apriti", false);
         
         mondo1.SetActive(false);
+        portaleMondo1.SetActive(false);
         mondo2.SetActive(true);
+        portaleMondo2.SetActive(true);
         
         yield return new WaitForSeconds(28f);
 
@@ -292,7 +298,9 @@ public class GameManager : MonoBehaviour
         
         animatorPorta.SetBool("Apriti", false);
         
+        portaleMondo2.SetActive(false);
         mondo2.SetActive(false);
+        portaleMondo3.SetActive(true);
         mondo3.SetActive(true);
         
         yield return new WaitForSeconds(25f);

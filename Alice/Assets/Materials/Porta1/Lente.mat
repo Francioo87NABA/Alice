@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ToonBinocoloY
-  m_Shader: {fileID: 4800000, guid: 635b6d6cf0100c346a11eaef94f12c28, type: 3}
-  m_ShaderKeywords: 
+  m_Name: Lente
+  m_Shader: {fileID: 4800000, guid: cf8e82a93c10bac47a9a8364930f8509, type: 3}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -56,37 +56,25 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ASEOutlineWidth: 0.02
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _FarLineWidth: 0.09
-    - _Float0: 0
+    - _DstBlend: 10
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightOffset: -0.57
-    - _LightStrength: 0
     - _Metallic: 0
-    - _Mode: 0
-    - _NearLineWidth: 0.6
+    - _Mode: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ShadowOffset: 0.57
-    - _ShadowStrength: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _ZWrite: 1
+    - _ZWrite: 0
     - __dirty: 0
     m_Colors:
-    - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.06132078, g: 1, b: 0.8556571, a: 0.3137255}
+    - _Color0: {r: 0, g: 1, b: 0.9400835, a: 0.64705884}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightTint: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 0}
-    - _LineColor: {r: 0, g: 0, b: 0, a: 0}
-    - _MainColor: {r: 1, g: 0, b: 0, a: 0}
-    - _ShadowTint: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
   m_BuildTextureStacks: []
