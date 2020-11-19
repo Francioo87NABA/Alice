@@ -7,24 +7,33 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Singleton;
     
+    
     public bool start;
+    
     public bool dentroPorta1;
-    public bool dentroPorta2;
-    public bool dentroPorta3;
     public bool fuoriPorta1;
+    public bool fuoriPorta2;
+    public bool fuoriPorta3;
+    
     public bool monocoloYPreso;
     public bool monocoloZPreso;
+    public bool coltelloPreso;
+    public bool mestoloPreso;
+    public bool soldiPresi;
+    public bool fotoPrese;
+    
     public bool vedoMonocoloY;
     public bool vedoMonocoloZ;
+    public bool esaminoSoldi;
+    public bool esaminoFoto;
 
     public bool lHoPreso;
+    
     
     public GameObject buttonMonocoloY;
     public GameObject buttonMonocoloZ;
 
     public GameObject triggerPorta1;
-    public GameObject triggerPorta2;
-    public GameObject triggerPorta3;
     public GameObject triggerFuoriPorta1;
     public GameObject triggerFuoriPorta2;
     public GameObject triggerFuoriPorta3;
@@ -34,13 +43,13 @@ public class GameManager : MonoBehaviour
     public GameObject filtroZ;
     
     public GameObject porta;
-    public Transform portaTransform;
     public GameObject cadavere;
-    public Transform cadavereTransform;
     public GameObject alice;
-    public Transform aliceTransform;
+    public GameObject armaColtello;
+    public GameObject armaMestolo;
 
     public GameObject player;
+    
     
     public AudioSource sequenza1;
     public AudioSource sequenza2;
@@ -51,9 +60,12 @@ public class GameManager : MonoBehaviour
     public AudioSource sequenza7;
     public AudioSource sequenzaSoldi;
     public AudioSource sequenzaFoto;
-    public AudioSource sequenzaFinale;
+    public AudioSource sequenzaParadiso;
+    public AudioSource sequenzaInferno;
+    
     
     private Animator animatorPorta;
+    
     
     private int one;
     private int two;
@@ -105,10 +117,38 @@ public class GameManager : MonoBehaviour
 
         if (five == 0 && vedoMonocoloY || vedoMonocoloZ)
         {
-            alice.transform.position = aliceTransform.position;
             alice.gameObject.SetActive(true);
             StartCoroutine(Sequenza5());
             five++;
+        }
+
+        if (six == 0 && coltelloPreso || mestoloPreso)
+        {
+            StartCoroutine(Sequenza6());
+            six++;
+        }
+
+        if (seven == 0 && fuoriPorta2 && coltelloPreso || mestoloPreso)
+        {
+            StartCoroutine(Sequenza7());
+        }
+
+        if (eight == 0 && esaminoFoto)
+        {
+            StartCoroutine(SequenzaFoto());
+            eight++;
+        }
+
+        if (nine == 0 && esaminoSoldi)
+        {
+            StartCoroutine(SequenzaSoldi());
+            nine++;
+        }
+
+        if (ten == 0 && fuoriPorta3 && soldiPresi || fotoPrese)
+        {
+            StartCoroutine(SequenzaFinale());
+            ten++;
         }
     }
 
@@ -116,6 +156,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Sequenza1()
     {
+        //parte allo start
+        
         yield return new WaitForSeconds(5f);
         
         sequenza1.transform.position = player.transform.position;
@@ -123,7 +165,6 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(15f); 
         
-        porta.transform.position = portaTransform.position;
         porta.SetActive(true);
         triggerPorta1.SetActive(true);
         
@@ -161,11 +202,11 @@ public class GameManager : MonoBehaviour
         sequenza3.transform.position = player.transform.position;
         sequenza3.gameObject.SetActive(true);
         
+        triggerPorta1.SetActive(false);
         triggerFuoriPorta1.SetActive(true);
         
-        cadavere.transform.position = cadavereTransform.position;
         cadavere.SetActive(true);
-        
+
         yield return new WaitForSeconds(10f);
         
         animatorPorta.SetBool("Apriti",true);
@@ -215,7 +256,23 @@ public class GameManager : MonoBehaviour
     IEnumerator Sequenza6()
     {
         //Parte quando prendi o il coltello o il mestolo 
+        
+        sequenza6.transform.position = player.transform.position;
+        sequenza6.gameObject.SetActive(true);
+        
         yield return new WaitForSeconds(1f);
+        
+        triggerFuoriPorta1.SetActive(false);
+        triggerFuoriPorta2.SetActive(true);
+
+        if (coltelloPreso)
+        {
+            armaColtello.SetActive(true);
+        }
+        else
+        {
+            armaMestolo.SetActive(true);
+        }
     }
 
     #endregion
@@ -225,7 +282,18 @@ public class GameManager : MonoBehaviour
     IEnumerator Sequenza7()
     {
         //Parte quando esci dalla porta 2
-        yield return new WaitForSeconds(1f);
+        
+        sequenza7.transform.position = player.transform.position;
+        sequenza7.gameObject.SetActive(true);
+        
+        yield return new WaitForSeconds(2f);
+        
+        animatorPorta.SetBool("Apriti", false);
+        
+        yield return new WaitForSeconds(25f);
+        
+        animatorPorta.SetBool("Apriti", true);
+        
     }
 
     #endregion
@@ -235,6 +303,13 @@ public class GameManager : MonoBehaviour
     IEnumerator SequenzaSoldi()
     {
         //Parte quando esamini i soldi 
+        
+        sequenzaSoldi.transform.position = player.transform.position;
+        sequenzaSoldi.gameObject.SetActive(true);
+        
+        triggerFuoriPorta2.SetActive(false);
+        triggerFuoriPorta3.SetActive(true);
+        
         yield return new WaitForSeconds(1f);
     }
 
@@ -245,6 +320,13 @@ public class GameManager : MonoBehaviour
     IEnumerator SequenzaFoto()
     {
         //Parte quando esamini le foto
+        
+        sequenzaFoto.transform.position = player.transform.position;
+        sequenzaFoto.gameObject.SetActive(true);
+        
+        triggerFuoriPorta2.SetActive(false);
+        triggerFuoriPorta3.SetActive(true);
+        
         yield return new WaitForSeconds(1f);
     }
 
@@ -252,12 +334,22 @@ public class GameManager : MonoBehaviour
     
     #region SequenzaFinale
 
-    IEnumerator Fine()
+    IEnumerator SequenzaFinale()
     {
-        //Parte quando esci dalla porta 3
-        yield return new WaitForSeconds(1f);
+        //Parte quando esci dalla porta 3 e hai preso o soldi o foto
         
-        //se soldi un audio se foto un altro 
+        yield return new WaitForSeconds(4f);
+
+        if (soldiPresi)
+        {
+            sequenzaInferno.transform.position = player.transform.position;
+            sequenzaInferno.gameObject.SetActive(true);
+        }
+        else
+        {
+            sequenzaParadiso.transform.position = player.transform.position;
+            sequenzaParadiso.gameObject.SetActive(true);
+        }
     }
 
     #endregion
@@ -289,5 +381,15 @@ public class GameManager : MonoBehaviour
     {
         filtroZ.SetActive(false);
         vedoMonocoloZ = false;
+    }
+
+    public void EsaminandoSoldi()
+    {
+        esaminoSoldi = true;
+    }
+
+    public void EsaminandoFoto()
+    {
+        esaminoFoto = true;
     }
 }

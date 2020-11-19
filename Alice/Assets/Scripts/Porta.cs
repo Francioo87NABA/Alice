@@ -7,8 +7,6 @@ public class Porta : MonoBehaviour
 {
 
     public bool porta1;
-    public bool porta2;
-    public bool porta3;
     public bool fuoriPorta1;
     public bool fuoriPorta2;
     public bool fuoriPorta3;
@@ -21,17 +19,17 @@ public class Porta : MonoBehaviour
             {
                 GameManager.Singleton.dentroPorta1 = true;
             }
-            else if (porta2)
-            {
-                GameManager.Singleton.dentroPorta2 = true;
-            }
-            else if (porta3)
-            {
-                GameManager.Singleton.dentroPorta3 = true;
-            }
             else if (fuoriPorta1)
             {
                 GameManager.Singleton.fuoriPorta1 = true;
+            }
+            else if (fuoriPorta2)
+            {
+                GameManager.Singleton.fuoriPorta2 = true;
+            }
+            else if (fuoriPorta3)
+            {
+                GameManager.Singleton.fuoriPorta3 = true;
             }
         }
        
