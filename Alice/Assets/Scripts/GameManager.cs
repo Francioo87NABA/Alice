@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool start;
     
     public bool dentroPorta1;
+    public bool dentroPorta2;
     public bool fuoriPorta1;
     public bool fuoriPorta2;
     public bool fuoriPorta3;
@@ -45,9 +46,12 @@ public class GameManager : MonoBehaviour
     public GameObject portaleMondo2;
     public GameObject portaleMondo3;
 
+    public GameObject sangue;
     public GameObject porta;
     public GameObject mondo1;
     public GameObject mondo2;
+    public GameObject coltelloMondo2;
+    public GameObject mestoloMondo2;
     public GameObject mondo3;
     public GameObject cadavere;
     public GameObject alice;
@@ -78,6 +82,8 @@ public class GameManager : MonoBehaviour
     private int three;
     private int four;
     private int five;
+    private int fivePointOne;
+    private int fivePointTwo;
     private int six;
     private int seven;
     private int eight;
@@ -128,16 +134,28 @@ public class GameManager : MonoBehaviour
             five++;
         }
 
-        if (six == 0 && coltelloPreso || mestoloPreso)
+        if (fivePointOne == 0 && dentroPorta2 && vedoMonocoloY)
+        {
+            mestoloMondo2.SetActive(true);
+            fivePointOne++;
+        }
+
+        if (fivePointTwo == 0 && dentroPorta2 && vedoMonocoloZ)
+        {
+            coltelloMondo2.SetActive(true);
+            fivePointTwo++;
+        }
+
+        if (six == 0 && fivePointOne == 1 && fivePointTwo == 1 && coltelloPreso || mestoloPreso)
         {
             StartCoroutine(Sequenza6());
             six++;
         }
 
-        if (seven == 0 && fuoriPorta2 && coltelloPreso || mestoloPreso)
+        /*if (seven == 0 && fuoriPorta2 && coltelloPreso || mestoloPreso)
         {
             StartCoroutine(Sequenza7());
-        }
+        }*/
 
         if (eight == 0 && esaminoFoto)
         {
@@ -164,8 +182,8 @@ public class GameManager : MonoBehaviour
     {
         //parte allo start
         
-        yield return new WaitForSeconds(5f);
-        
+        sangue.SetActive(true);
+
         sequenza1.transform.position = player.transform.position;
         sequenza1.gameObject.SetActive(true);
 
@@ -185,6 +203,8 @@ public class GameManager : MonoBehaviour
     IEnumerator Sequenza2()
     {
         //parte quando si entra dentro la porta1
+        
+        yield return new WaitForSeconds(2f);
         
         sequenza2.transform.position = player.transform.position;
         sequenza2.gameObject.SetActive((true));
@@ -211,7 +231,7 @@ public class GameManager : MonoBehaviour
         
         cadavere.SetActive(true);
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7.5f);
         
         animatorPorta.SetBool("Apriti",true);
     }
@@ -231,12 +251,14 @@ public class GameManager : MonoBehaviour
         
         animatorPorta.SetBool("Apriti", false);
         
+        triggerFuoriPorta1.SetActive(false);
         mondo1.SetActive(false);
         portaleMondo1.SetActive(false);
         mondo2.SetActive(true);
         portaleMondo2.SetActive(true);
+        triggerPorta2.SetActive(true);
         
-        yield return new WaitForSeconds(28f);
+        yield return new WaitForSeconds(23f);
 
         buttonMonocoloY.SetActive(true);
         buttonMonocoloZ.SetActive(true);
@@ -249,11 +271,12 @@ public class GameManager : MonoBehaviour
     IEnumerator Sequenza5()
     {
         // parte quando vedi alice 
+        yield return new WaitForSeconds(2f);
         
         sequenza5.transform.position = player.transform.position;
         sequenza5.gameObject.SetActive(true);
         
-        yield return new WaitForSeconds(25f);
+        yield return new WaitForSeconds(22f);
         
         animatorPorta.SetBool("Apriti",true);
     }
@@ -272,7 +295,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         
         triggerFuoriPorta1.SetActive(false);
-        triggerFuoriPorta2.SetActive(true);
+        //triggerFuoriPorta2.SetActive(true);
 
         if (coltelloPreso)
         {

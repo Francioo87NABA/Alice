@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(ARRaycastManager))]
 public class Raycast : MonoBehaviour
@@ -25,22 +26,30 @@ public class Raycast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && instantiatedObject == null)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began /* && instantiatedObject == null*/)
         {
+
             Vector2 touchPosition = Input.GetTouch(0).position;
+            
             if (myRaycastManager.Raycast(touchPosition, planesHitList, TrackableType.PlaneWithinPolygon))
             {
                 Pose planeHitPose = planesHitList[0].pose;
-                instantiatedObject = Instantiate(prefabToInstantiate, planeHitPose.position, planeHitPose.rotation);
-                //prefabToInstantiate.transform.position = planeHitPose.position;
-
-                //instantiatedObject = prefabToInstantiate;
+                //instantiatedObject = Instantiate(prefabToInstantiate, planeHitPose.position, planeHitPose.rotation);
 
                 GameManager.Singleton.start = true;
+                
+                GameObject[] allPlanesInScene = GameObject.FindGameObjectsWithTag("ARPlanes");
+                for (int i = 0; i < allPlanesInScene.Length; i++)
+                {
+                    allPlanesInScene[i].SetActive(false);
+                }
+                
+                planeManager.enabled = false;
             }
         }
-
-        if (instantiatedObject != null)
+        
+        
+        /*if (instantiatedObject != null)
         {
             if (!deactivatePlanes)
             {
@@ -55,7 +64,7 @@ public class Raycast : MonoBehaviour
                 EnableDisablePlanes(true);
                 deactivatePlanes = false;
             }
-        }
+        }*/
     }
 
     void EnableDisablePlanes(bool status)
@@ -73,7 +82,8 @@ public class Raycast : MonoBehaviour
 
     public void ResetSpawnObject()
     {
-        Destroy(instantiatedObject);
-        instantiatedObject = null;
+        Application.Quit();
+        /*Destroy(instantiatedObject);
+        instantiatedObject = null;*/
     }
 }

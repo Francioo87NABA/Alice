@@ -16,37 +16,52 @@ public class Porta : MonoBehaviour
     public GameObject filtroCameraMondo2;
     public GameObject filtroCameraMondo3;
 
+    private int one;
+    private int two;
+    private int trhee;
+    private int four;
+    private int five;
+    private int six;
+    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (porta1)
+            if (one == 0 && porta1)
             {
                 GameManager.Singleton.dentroPorta1 = true;
                 filtroCameraMondo1.SetActive(true);
+                one++;
             }
-            else if (porta2)
+            else if (two == 0 && porta2)
             {
+                GameManager.Singleton.dentroPorta2 = true;
                 filtroCameraMondo2.SetActive(true);
+                two++;
             }
-            else if (porta3)
+            else if (trhee == 0 && porta3)
             {
                 filtroCameraMondo3.SetActive(true);
+                trhee++;
             }
-            else if (fuoriPorta1)
+            else if (four == 0 && fuoriPorta1)
             {
                 GameManager.Singleton.fuoriPorta1 = true;
                 filtroCameraMondo1.SetActive(false);
+                four++;
             }
-            else if (fuoriPorta2)
+            else if (five == 0 && fuoriPorta2)
             {
                 GameManager.Singleton.fuoriPorta2 = true;
                 filtroCameraMondo2.SetActive(false);
+                five++;
             }
-            else if (fuoriPorta3)
+            else if (six == 0 && fuoriPorta3)
             {
                 GameManager.Singleton.fuoriPorta3 = true;
                 filtroCameraMondo3.SetActive(false);
+                six++;
             }
         }
        
