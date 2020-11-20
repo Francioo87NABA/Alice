@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     public GameObject buttonMonocoloZ;
 
     public GameObject triggerPorta1;
+    public GameObject triggerPorta2;
+    public GameObject triggerPorta3;
     public GameObject triggerFuoriPorta1;
     public GameObject triggerFuoriPorta2;
     public GameObject triggerFuoriPorta3;
@@ -170,8 +172,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(15f); 
         
         porta.SetActive(true);
-        triggerPorta1.SetActive(true);
-        
+
         yield return new WaitForSeconds(5f);
         
         animatorPorta.SetBool("Apriti",true);
@@ -206,7 +207,6 @@ public class GameManager : MonoBehaviour
         sequenza3.transform.position = player.transform.position;
         sequenza3.gameObject.SetActive(true);
         
-        triggerPorta1.SetActive(false);
         triggerFuoriPorta1.SetActive(true);
         
         cadavere.SetActive(true);

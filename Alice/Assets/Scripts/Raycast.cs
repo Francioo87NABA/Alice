@@ -32,6 +32,11 @@ public class Raycast : MonoBehaviour
             {
                 Pose planeHitPose = planesHitList[0].pose;
                 instantiatedObject = Instantiate(prefabToInstantiate, planeHitPose.position, planeHitPose.rotation);
+                //prefabToInstantiate.transform.position = planeHitPose.position;
+
+                //instantiatedObject = prefabToInstantiate;
+
+                GameManager.Singleton.start = true;
             }
         }
 
