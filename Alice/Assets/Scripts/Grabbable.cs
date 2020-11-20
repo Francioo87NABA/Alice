@@ -72,6 +72,19 @@ public class Grabbable : MonoBehaviour
                 togliSoldi.SetActive(false);
                 GameManager.Singleton.lHoPreso = false;
             }
+
+            if (GameManager.Singleton.stoEsaminando && foto)
+            {
+                GameManager.Singleton.esaminoFoto = true;
+                GameManager.Singleton.stoEsaminando = false;
+
+            }
+            
+            if (GameManager.Singleton.stoEsaminando && soldi)
+            {
+                GameManager.Singleton.esaminoSoldi = true;
+                GameManager.Singleton.stoEsaminando = false;
+            }
         }
     }
 

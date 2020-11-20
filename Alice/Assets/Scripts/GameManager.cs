@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
     public bool vedoMonocoloZ;
     public bool esaminoSoldi;
     public bool esaminoFoto;
-
+    
+    public bool stoEsaminando;
     public bool lHoPreso;
     
     
@@ -372,6 +373,11 @@ public class GameManager : MonoBehaviour
         lHoPreso = true;
     }
     
+    public void Esaminalo()
+    {
+        stoEsaminando = true;
+    }
+    
     public void MonocoloY ()
     {
         vedoMonocoloY = true;
@@ -390,15 +396,5 @@ public class GameManager : MonoBehaviour
     public void MonocoloZOff ()
     {
         vedoMonocoloZ = false;
-    }
-
-    public void EsaminandoSoldi()
-    {
-        esaminoSoldi = true;
-    }
-
-    public void EsaminandoFoto()
-    {
-        esaminoFoto = true;
     }
 }
