@@ -66,15 +66,15 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightOffset: -0.57
+    - _LightOffset: -0.584
     - _LightStrength: 0
     - _Metallic: 0
     - _Mode: 0
     - _NearLineWidth: 0.6
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ShadowOffset: 0.57
-    - _ShadowStrength: 0
+    - _ShadowOffset: 0.203
+    - _ShadowStrength: 0.031
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -85,8 +85,8 @@ Material:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightTint: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 0}
+    - _LightTint: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0}
     - _LineColor: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 1, g: 0, b: 0, a: 0}
-    - _ShadowTint: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
+    - _ShadowTint: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0}
   m_BuildTextureStacks: []
