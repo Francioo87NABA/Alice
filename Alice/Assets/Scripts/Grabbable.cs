@@ -27,6 +27,12 @@ public class Grabbable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (foto && GameManager.Singleton.esaminoFoto && GameManager.Singleton.esaminoSoldi ||
+                soldi && GameManager.Singleton.esaminoFoto && GameManager.Singleton.esaminoSoldi)
+            {
+                bottonePrendi.SetActive(true);
+            }
+            
             if (GameManager.Singleton.lHoPreso && monocoloY)
             {
                 GameManager.Singleton.monocoloYPreso = true;
@@ -60,6 +66,21 @@ public class Grabbable : MonoBehaviour
                 GameManager.Singleton.lHoPreso = false;
                 bottonePrendi.SetActive(false);
             }
+
+            if (GameManager.Singleton.stoEsaminando && foto)
+            {
+                GameManager.Singleton.esaminoFoto = true;
+                GameManager.Singleton.stoEsaminando = false;
+                bottoneEsamina.SetActive(false);
+
+            }
+            
+            if (GameManager.Singleton.stoEsaminando && soldi)
+            {
+                GameManager.Singleton.esaminoSoldi = true;
+                GameManager.Singleton.stoEsaminando = false;
+                bottoneEsamina.SetActive(false);
+            }
             
             if (GameManager.Singleton.lHoPreso && soldi)
             {
@@ -78,21 +99,6 @@ public class Grabbable : MonoBehaviour
                 GameManager.Singleton.lHoPreso = false;
                 bottonePrendi.SetActive(false);
             }
-
-            if (GameManager.Singleton.stoEsaminando && foto)
-            {
-                GameManager.Singleton.esaminoFoto = true;
-                GameManager.Singleton.stoEsaminando = false;
-                bottoneEsamina.SetActive(false);
-
-            }
-            
-            if (GameManager.Singleton.stoEsaminando && soldi)
-            {
-                GameManager.Singleton.esaminoSoldi = true;
-                GameManager.Singleton.stoEsaminando = false;
-                bottoneEsamina.SetActive(false);
-            }
         }
     }
 
@@ -100,13 +106,34 @@ public class Grabbable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            bottonePrendi.SetActive(true);
+            if (monocoloY || monocoloZ)
+            {
+                bottonePrendi.SetActive(true);
+            }
 
-            if (soldi || foto && !GameManager.Singleton.esaminoFoto || !GameManager.Singleton.esaminoSoldi)
+            if (coltello && GameManager.Singleton.coltelloVisto && GameManager.Singleton.mestoloVisto ||
+                mestolo && GameManager.Singleton.coltelloVisto && GameManager.Singleton.mestoloVisto)
+            {
+                bottonePrendi.SetActive(true);
+            }
+            
+            if (soldi && !GameManager.Singleton.esaminoSoldi || foto && !GameManager.Singleton.esaminoFoto)
             {
                 bottoneEsamina.SetActive(true);
             }
         }
     }
-    
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            bottonePrendi.SetActive(false);
+
+            if (soldi || foto)
+            {
+                bottoneEsamina.SetActive(false);
+            }
+        }
+    }
 }

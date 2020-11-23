@@ -89,7 +89,7 @@ Material:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightTint: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 0}
+    - _LightTint: {r: 0, g: 0, b: 0, a: 0}
     - _LineColor: {r: 0.41176474, g: 0.38431376, b: 0.3647059, a: 0}
     - _MainColor: {r: 0.67058825, g: 0.254902, b: 0.28810155, a: 0}
     - _ShadowTint: {r: 0.02300641, g: 0.19037086, b: 0.4433962, a: 0}

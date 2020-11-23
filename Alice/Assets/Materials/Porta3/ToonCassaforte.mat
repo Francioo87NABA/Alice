@@ -66,15 +66,15 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightOffset: -0.898
+    - _LightOffset: -0.496
     - _LightStrength: 0
     - _Metallic: 0
     - _Mode: 0
     - _NearLineWidth: 0.03
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ShadowOffset: 0
-    - _ShadowStrength: 0.016
+    - _ShadowOffset: 0.05
+    - _ShadowStrength: 0.16
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

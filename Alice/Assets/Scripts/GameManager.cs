@@ -25,11 +25,14 @@ public class GameManager : MonoBehaviour
     
     public bool vedoMonocoloY;
     public bool vedoMonocoloZ;
+    public bool coltelloVisto;
+    public bool mestoloVisto;
     public bool esaminoSoldi;
     public bool esaminoFoto;
     
     public bool stoEsaminando;
     public bool lHoPreso;
+    public bool presoDebug;
     
     
     public GameObject buttonMonocoloY;
@@ -45,14 +48,14 @@ public class GameManager : MonoBehaviour
     public GameObject portaleMondo1;
     public GameObject portaleMondo2;
     public GameObject portaleMondo3;
-
-    public GameObject sangue;
-    public GameObject porta;
+    
     public GameObject mondo1;
     public GameObject mondo2;
+    public GameObject mondo3;
     public GameObject coltelloMondo2;
     public GameObject mestoloMondo2;
-    public GameObject mondo3;
+    public GameObject sangue;
+    public GameObject porta;
     public GameObject cadavere;
     public GameObject alice;
     public GameObject armaColtello;
@@ -136,26 +139,29 @@ public class GameManager : MonoBehaviour
 
         if (fivePointOne == 0 && dentroPorta2 && vedoMonocoloY)
         {
-            mestoloMondo2.SetActive(true);
+            coltelloMondo2.SetActive(true);
+            coltelloVisto = true;
             fivePointOne++;
         }
 
         if (fivePointTwo == 0 && dentroPorta2 && vedoMonocoloZ)
         {
-            coltelloMondo2.SetActive(true);
+            mestoloMondo2.SetActive(true);
+            mestoloVisto = true;
             fivePointTwo++;
         }
 
-        if (six == 0 && fivePointOne == 1 && fivePointTwo == 1 && coltelloPreso || mestoloPreso)
+        if (six == 0 && coltelloPreso || mestoloPreso)
         {
             StartCoroutine(Sequenza6());
             six++;
         }
 
-        /*if (seven == 0 && fuoriPorta2 && coltelloPreso || mestoloPreso)
+        if (seven == 0 && fuoriPorta2 && presoDebug)
         {
             StartCoroutine(Sequenza7());
-        }*/
+            seven++;
+        }
 
         if (eight == 0 && esaminoFoto)
         {
@@ -231,7 +237,7 @@ public class GameManager : MonoBehaviour
         
         cadavere.SetActive(true);
 
-        yield return new WaitForSeconds(7.5f);
+        yield return new WaitForSeconds(8.5f);
         
         animatorPorta.SetBool("Apriti",true);
     }
@@ -251,6 +257,8 @@ public class GameManager : MonoBehaviour
         
         animatorPorta.SetBool("Apriti", false);
         
+        yield return new WaitForSeconds(6f);
+        
         triggerFuoriPorta1.SetActive(false);
         mondo1.SetActive(false);
         portaleMondo1.SetActive(false);
@@ -258,7 +266,7 @@ public class GameManager : MonoBehaviour
         portaleMondo2.SetActive(true);
         triggerPorta2.SetActive(true);
         
-        yield return new WaitForSeconds(23f);
+        yield return new WaitForSeconds(17f);
 
         buttonMonocoloY.SetActive(true);
         buttonMonocoloZ.SetActive(true);
@@ -276,7 +284,7 @@ public class GameManager : MonoBehaviour
         sequenza5.transform.position = player.transform.position;
         sequenza5.gameObject.SetActive(true);
         
-        yield return new WaitForSeconds(22f);
+        yield return new WaitForSeconds(23.25f);
         
         animatorPorta.SetBool("Apriti",true);
     }
@@ -295,7 +303,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         
         triggerFuoriPorta1.SetActive(false);
-        //triggerFuoriPorta2.SetActive(true);
+        triggerFuoriPorta2.SetActive(true);
+
+        presoDebug = true;
 
         if (coltelloPreso)
         {
@@ -322,15 +332,18 @@ public class GameManager : MonoBehaviour
         
         animatorPorta.SetBool("Apriti", false);
         
+        yield return new WaitForSeconds(6f);
+        
+        triggerFuoriPorta2.SetActive(false);
+        triggerPorta3.SetActive(true);
         portaleMondo2.SetActive(false);
         mondo2.SetActive(false);
         portaleMondo3.SetActive(true);
         mondo3.SetActive(true);
         
-        yield return new WaitForSeconds(25f);
+        yield return new WaitForSeconds(20f);
         
         animatorPorta.SetBool("Apriti", true);
-        
     }
 
     #endregion
@@ -344,7 +357,7 @@ public class GameManager : MonoBehaviour
         sequenzaSoldi.transform.position = player.transform.position;
         sequenzaSoldi.gameObject.SetActive(true);
         
-        triggerFuoriPorta2.SetActive(false);
+        triggerPorta3.SetActive(false);
         triggerFuoriPorta3.SetActive(true);
         
         yield return new WaitForSeconds(1f);
@@ -361,7 +374,7 @@ public class GameManager : MonoBehaviour
         sequenzaFoto.transform.position = player.transform.position;
         sequenzaFoto.gameObject.SetActive(true);
         
-        triggerFuoriPorta2.SetActive(false);
+        triggerPorta3.SetActive(false);
         triggerFuoriPorta3.SetActive(true);
         
         yield return new WaitForSeconds(1f);
